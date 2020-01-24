@@ -3,7 +3,10 @@ package ru.avalon.java.udp;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.net.UnknownHostException;
 
 /**
  * Упражнение, направленное на выработку умений, связанных
@@ -39,7 +42,7 @@ public final class UdpSender {
         /*
          * TODO Реализовать метод prepareMessage класса UdpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "Hi";
     }
 
     /**
@@ -47,11 +50,13 @@ public final class UdpSender {
      *
      * @return адрес конечной точки.
      */
-    private static SocketAddress prepareAddress() {
+    private static SocketAddress prepareAddress() throws UnknownHostException {
         /*
          * TODO Реализовать метод prepareAddress класса UdpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        InetAddress add = InetAddress.getLocalHost();
+        SocketAddress finalAddress = new InetSocketAddress(add, 7450);
+        return finalAddress;
     }
 
     /**
@@ -64,7 +69,7 @@ public final class UdpSender {
         /*
          * TODO Реализовать метод createSocket класса UdpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new DatagramSocket();
     }
 
     /**
@@ -78,7 +83,9 @@ public final class UdpSender {
         /*
          * TODO Реализовать метод pack класса UdpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        byte[] buf = message.getBytes();
+        DatagramPacket packed = new DatagramPacket(buf, buf.length);
+        return packed;
     }
 
 }
