@@ -1,12 +1,10 @@
 package ru.avalon.java.tcp;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.io.*;
+import java.net.*;
 
 /**
- * Упражнение на выработку базовых умений использования
- * протокола TCP.
+ * Упражнение на выработку базовых умений использования протокола TCP.
  *
  * @author Daniel Alpatov
  */
@@ -34,7 +32,7 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод prepareMessage класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "Hi";
     }
 
     /**
@@ -42,11 +40,13 @@ public final class TcpSender {
      *
      * @return экземпля типа {@link SocketAddress}
      */
-    private static SocketAddress prepareAddress() {
+    private static SocketAddress prepareAddress() throws UnknownHostException {
         /*
          * TODO Реализовать метод prepareAddress класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        InetAddress add = InetAddress.getLocalHost();
+        SocketAddress finalAddress = new InetSocketAddress(add, 7450);
+        return finalAddress;
     }
 
     /**
@@ -63,7 +63,9 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод connect класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Socket result = new Socket();
+        result.connect(address);
+        return result;
     }
 
     /**
@@ -78,7 +80,10 @@ public final class TcpSender {
         /*
          * TODO Реализовать метод send класса TcpSender
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        OutputStream st = socket.getOutputStream();
+        PrintWriter writer = new PrintWriter(st);
+        writer.write(message + "\r");
+        writer.flush();
+        System.out.println(message);
     }
-
 }

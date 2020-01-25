@@ -1,6 +1,7 @@
 package ru.avalon.java.udp;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -29,6 +30,7 @@ public final class UdpSender {
         DatagramSocket socket = createSocket();
         // 6. Отправляем сообщение
         socket.send(packet);
+        System.out.println(message);
         // 7. Освобождаем ресурсы
         socket.close();
     }
@@ -55,7 +57,7 @@ public final class UdpSender {
          * TODO Реализовать метод prepareAddress класса UdpSender
          */
         InetAddress add = InetAddress.getLocalHost();
-        SocketAddress finalAddress = new InetSocketAddress(add, 7450);
+        SocketAddress finalAddress = new InetSocketAddress(add, 0);
         return finalAddress;
     }
 
@@ -79,11 +81,11 @@ public final class UdpSender {
      *
      * @return экземпляр типа {@link DatagramPacket}.
      */
-    private static DatagramPacket pack(String message) {
+    private static DatagramPacket pack(String message) throws UnsupportedEncodingException {
         /*
          * TODO Реализовать метод pack класса UdpSender
          */
-        byte[] buf = message.getBytes();
+        byte[] buf = message.getBytes("UTF-8");
         DatagramPacket packed = new DatagramPacket(buf, buf.length);
         return packed;
     }

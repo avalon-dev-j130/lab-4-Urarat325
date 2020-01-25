@@ -1,10 +1,10 @@
 package ru.avalon.java.udp;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.util.Arrays;
 
 /**
  * Упражнение, на правленное на выработку умений, связанных с полученеим
@@ -27,8 +27,10 @@ public final class UdpReceiver {
         socket.receive(packet);
         // 6. На основании данных пакета формируем текстовое сообщение.
         final String message = getMessage(packet);
+        System.out.println(message+"sdfsdf");
         // 7. Освобождаем ресурсы.
         socket.close();
+        
     }
 
     /**
@@ -81,12 +83,12 @@ public final class UdpReceiver {
      *
      * @return строковое сообщение.
      */
-    private static String getMessage(DatagramPacket packet) {
+    private static String getMessage(DatagramPacket packet) throws UnsupportedEncodingException {
         /*
          * TODO Реализовать метод getMessage класса UdpReceiver
          */
         byte[] buf = packet.getData();
-        String message = Arrays.toString(buf);
+        String message = new String(buf,"UTF-8");
         return message;
     }
 
